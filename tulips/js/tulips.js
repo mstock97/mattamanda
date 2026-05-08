@@ -5,7 +5,8 @@ window.TULIP_VARIETIES = {
   mom: [
     { name:'Tulipa World Peace',      type:'single',  c1:'#e8b830', c2:'#c8380a', c3:'#4a7c3f', accent:'#e8d060',
       desc:'Bold yellow blooms with a fiery red-orange glow through each petal. A Darwin hybrid that glows like a sunset.',
-      bloom:'Mid spring', height:'17.5–21.5 in' },
+      bloom:'Mid spring', height:'17.5–21.5 in',
+      photo: 'https://www.siteone.com/en/tul0709b-tulipa-bulb-darwin-hybrid-world-peace-tulip/p/897125'},
     { name:'Tulipa Whispering Dream', type:'lily',    c1:'#f5f0e8', c2:'#c8306a', c3:'#4a7c3f', accent:'#e890b0',
       desc:'Elegant lily-flowering tulip: ivory-white petals that slowly transform to rich raspberry-magenta as they mature.',
       bloom:'Mid spring', height:'19.5–23.5 in' },

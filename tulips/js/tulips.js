@@ -406,7 +406,7 @@ window.buildVarietyGrid = function(page, targetEl) {
   if (!varieties || !varieties.length) return;
 
   // mobile column count: 2-col for large sets (>=8 varieties), 1-col for small sets
-  var mobileCols = varieties.length >= 8 ? 2 : 1;
+  var mobileCols = varieties.length >= 30 ? 2 : 1;
 
   // Inject shared grid + modal styles once
   if (!document.getElementById('tulip-grid-styles')) {

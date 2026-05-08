@@ -29,7 +29,7 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 56px 24px 32px;
+      padding: 56px 24px 28px;
       max-width: 820px;
       margin: 0 auto;
     }
@@ -54,7 +54,7 @@
     .quick-tips {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
       margin: 0 auto 52px;
       padding: 0 24px;
@@ -66,13 +66,12 @@
     .tip-pill {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
       background: var(--card-bg);
       border: 1.5px solid var(--card-border);
       border-radius: 99px;
-      padding: 8px 18px;
+      padding: 7px 16px;
       font-family: var(--font-body);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 800;
       color: var(--heading);
       white-space: nowrap;
@@ -83,7 +82,7 @@
       z-index: 1;
       max-width: 760px;
       width: calc(100% - 48px);
-      margin: 0 auto 40px;
+      margin: 0 auto 32px;
     }
 
     .section-eyebrow {
@@ -103,96 +102,208 @@
       line-height: 1.2;
     }
 
-    .season-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .timeline-outer {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      width: calc(100% - 48px);
+      margin: 0 auto 12px;
     }
 
-    .season-card {
+    .timeline-track {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 0 8px;
+      margin-bottom: 24px;
+    }
+
+    .phase-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: clamp(64px, 18vw, 88px);
+      position: relative;
+      z-index: 1;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .phase-circle {
+      width: clamp(48px, 13vw, 64px);
+      height: clamp(48px, 13vw, 64px);
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: var(--shadow);
+    }
+
+    .phase-node:hover .phase-circle {
+      border-color: var(--accent);
+      transform: scale(1.07);
+    }
+
+    .phase-node.active .phase-circle {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.14);
+      box-shadow: 0 6px 20px rgba(45, 181, 96, 0.35);
+    }
+
+    .phase-node.done .phase-circle {
+      background: #dcfae6;
+      border-color: var(--accent);
+    }
+
+    .phase-label {
+      font-family: var(--font-body);
+      font-size: clamp(0.72rem, 2vw, 0.85rem);
+      font-weight: 800;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.2;
+      transition: color 0.2s;
+    }
+
+    .phase-node.active .phase-label { color: var(--heading); }
+    .phase-node.done .phase-label   { color: var(--accent); }
+
+    .phase-months {
+      font-family: var(--font-body);
+      font-size: clamp(0.6rem, 1.6vw, 0.72rem);
+      font-weight: 600;
+      color: var(--text-muted);
+      opacity: 0.65;
+      text-align: center;
+    }
+
+    .timeline-line {
+      flex: 1;
+      height: 2px;
+      background: var(--card-border);
+      align-self: flex-start;
+      margin-top: clamp(23px, 6.5vw, 31px);
+      transition: background 0.35s ease;
+    }
+
+    .timeline-line.passed { background: var(--accent); }
+
+    .phase-panel-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      width: calc(100% - 48px);
+      margin: 0 auto 48px;
+    }
+
+    .phase-panel {
       background: var(--card-bg);
       border: 2px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 24px;
+      padding: clamp(22px, 5vw, 36px);
       box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      min-height: 200px;
     }
 
-    .season-card .season-icon {
-      font-size: 2.2rem;
-      display: block;
-      margin-bottom: 10px;
+    .phase-panel.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .season-card h3 {
+    .panel-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .panel-title {
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: clamp(1.3rem, 4vw, 1.7rem);
       color: var(--heading);
-      margin-bottom: 10px;
+      margin-bottom: 22px;
+      line-height: 1.2;
     }
 
-    .season-card p {
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: var(--text);
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .season-card.fall   { border-color: #f5c8a0; background: linear-gradient(135deg, #fff 60%, #fff8ee); }
-    .season-card.winter { border-color: #c0d8f0; background: linear-gradient(135deg, #fff 60%, #f0f5ff); }
-    .season-card.spring { border-color: #a8e6b8; background: linear-gradient(135deg, #fff 60%, #eeffee); }
-    .season-card.summer { border-color: #f5e0a0; background: linear-gradient(135deg, #fff 60%, #fffbea); }
-
-    .step-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    .step-list { display: flex; flex-direction: column; gap: 14px; }
 
     .step-item {
       display: flex;
-      gap: 18px;
+      gap: 16px;
       align-items: flex-start;
-      background: var(--card-bg);
-      border: 2px solid var(--card-border);
-      border-radius: 18px;
-      padding: 20px 22px;
-      box-shadow: var(--shadow);
+      background: var(--bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px 18px;
     }
 
     .step-num {
       flex-shrink: 0;
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: var(--accent);
       color: var(--accent-text);
       font-family: var(--font-body);
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.95rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 12px rgba(45,181,96,0.3);
-    }
-
-    .step-num.q {
-      background: #e8f5ee;
-      color: var(--heading);
-      box-shadow: none;
-      font-size: 1.3rem;
+      box-shadow: 0 3px 10px rgba(45, 181, 96, 0.3);
     }
 
     .step-body h4 {
       font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--heading);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .step-body p {
-      font-size: 0.88rem;
-      line-height: 1.7;
+      font-size: 0.87rem;
+      line-height: 1.75;
+      color: var(--text);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .check-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+
+    .check-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 14px;
+      padding: 13px 16px;
+    }
+
+    .check-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+
+    .check-body h4 {
+      font-family: var(--font-display);
+      font-size: 0.93rem;
+      color: var(--heading);
+      margin-bottom: 3px;
+    }
+
+    .check-body p {
+      font-size: 0.83rem;
+      line-height: 1.65;
       color: var(--text);
       font-weight: 600;
       margin: 0;
@@ -201,27 +312,92 @@
     .callout {
       background: var(--card-bg);
       border: 2px solid var(--card-border);
-      border-left: 6px solid var(--accent);
+      border-left: 5px solid var(--accent);
       border-radius: var(--radius);
-      padding: 22px 26px;
-      box-shadow: var(--shadow);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding: 18px 22px;
+      margin-top: 18px;
     }
 
-    .callout .callout-label {
-      font-size: 0.72rem;
+    .callout-label {
+      font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
     .callout p {
-      font-size: 0.92rem;
-      line-height: 1.7;
+      font-size: 0.88rem;
+      line-height: 1.75;
       color: var(--text);
       font-weight: 600;
       margin: 0;
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1.5px solid var(--card-border);
+    }
+
+    .next-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 11px 22px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(45, 181, 96, 0.3);
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+
+    .next-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(45, 181, 96, 0.4);
+    }
+
+    .restart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--heading);
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 11px 22px;
+      border-radius: 99px;
+      border: 2px solid var(--card-border);
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
+    }
+
+    .restart-btn:hover {
+      background: #dcfae6;
+      border-color: var(--accent);
+    }
+
+    .guide-divider {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin: 0 auto 40px;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      letter-spacing: 0.5em;
+      opacity: 0.3;
     }
 
     .timing-table {
@@ -240,10 +416,10 @@
     .timing-table thead th {
       font-family: var(--font-body);
       font-weight: 800;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 14px 20px;
+      padding: 13px 18px;
       text-align: left;
     }
 
@@ -252,8 +428,8 @@
     .timing-table tbody tr:nth-child(even) { background: #f5fff8; }
 
     .timing-table td {
-      padding: 13px 20px;
-      font-size: 0.88rem;
+      padding: 12px 18px;
+      font-size: 0.86rem;
       font-weight: 600;
       color: var(--text);
       vertical-align: top;
@@ -267,10 +443,10 @@
 
     .timing-badge {
       display: inline-block;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.05em;
-      padding: 2px 10px;
+      padding: 2px 9px;
       border-radius: 99px;
       white-space: nowrap;
     }
@@ -278,317 +454,157 @@
     .timing-badge.wait  { background: #fef9c3; color: #7a5a00; }
     .timing-badge.store { background: #e0f0ff; color: #1a4080; }
 
-    .checklist { display: flex; flex-direction: column; gap: 12px; }
+    .accordion { display: flex; flex-direction: column; gap: 8px; }
 
-    .check-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
+    .acc-item {
       background: var(--card-bg);
       border: 2px solid var(--card-border);
       border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .acc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 16px 20px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      cursor: pointer;
+      gap: 12px;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.18s;
     }
 
-    .check-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+    .acc-header:hover { background: #f0fdf4; }
 
-    .check-body h4 {
+    .acc-header h4 {
       font-family: var(--font-display);
-      font-size: 0.98rem;
+      font-size: 1rem;
       color: var(--heading);
-      margin-bottom: 4px;
+      margin: 0;
+      line-height: 1.3;
     }
 
-    .check-body p {
-      font-size: 0.85rem;
-      line-height: 1.65;
+    .acc-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1.5px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .acc-item.open .acc-icon {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-text);
+      transform: rotate(45deg);
+    }
+
+    .acc-body {
+      display: none;
+      padding: 0 20px 18px;
+      border-top: 1.5px solid var(--card-border);
+    }
+
+    .acc-body.open { display: block; }
+
+    .acc-body p {
+      font-size: 0.88rem;
+      line-height: 1.75;
       color: var(--text);
       font-weight: 600;
-      margin: 0;
+      margin: 14px 0 0;
     }
 
-    .guide-divider {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      margin: 0 auto 40px;
-      color: var(--text-muted);
-      font-size: 1.4rem;
-      letter-spacing: 0.5em;
-      opacity: 0.35;
+    .closing-callout {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-left: 5px solid var(--accent);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      box-shadow: var(--shadow);
     }
 
-    footer { margin-top: 24px; }
-
-    @media (max-width: 560px) {
-      .season-grid { grid-template-columns: 1fr; }
-      .timing-table thead th, .timing-table td { padding: 11px 14px; }
-      .quick-tips { gap: 8px; }
-      .tip-pill { font-size: 0.76rem; padding: 7px 14px; }
+    @media (max-width: 480px) {
+      .phase-months { display: none; }
+      .timing-table thead th, .timing-table td { padding: 10px 12px; font-size: 0.82rem; }
+      .quick-tips { gap: 7px; }
+      .tip-pill { font-size: 0.75rem; padding: 6px 13px; }
     }
   </style>
 </head>
 <body>
   <div class="petal-bg"></div>
 
-  <!-- HERO -->
   <div class="guide-hero">
     <span class="tag-pill">🌷 Your Tulip Care Guide</span>
     <h1>Growing Beautiful<br><em>Tulips Every Year</em></h1>
     <p class="subtitle">
-      Dutch tulips are perennials — with a little care each season, your bulbs will come back
-      bigger and brighter year after year. Here's everything you need to know, from the
-      moment you plant your bulbs all the way through to the next bloom.
+      No gardening experience needed! Dutch tulips are tougher than they look. Follow
+      these four seasonal steps and your bulbs will come back bigger and more colorful
+      every single year.
     </p>
   </div>
 
-  <!-- QUICK TIPS -->
   <div class="quick-tips">
     <div class="tip-pill">🍂 Start in fall</div>
-    <div class="tip-pill">❄️ Cold = blooms</div>
+    <div class="tip-pill">❄️ Cold weather = blooms</div>
     <div class="tip-pill">🌞 Full sun preferred</div>
-    <div class="tip-pill">✂️ Deadhead after bloom</div>
-    <div class="tip-pill">📦 Lift &amp; store in summer</div>
+    <div class="tip-pill">✂️ Remove dead flowers</div>
+    <div class="tip-pill">📦 Dig up &amp; store in summer</div>
     <div class="tip-pill">🔁 Repeat every year</div>
   </div>
 
-  <!-- STEP 1: FALL PLANTING -->
   <div class="guide-section">
-    <div class="section-eyebrow">Step 1 — Fall</div>
-    <div class="section-title">Plant Your Bulbs in Autumn</div>
-
-    <div class="step-list" style="margin-bottom:20px;">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Wait for the Right Temperature</h4>
-          <p>Plant in October or November, once overnight temperatures have consistently dipped
-            below 50°F. Planting too early in warm soil can trigger premature sprouting, which
-            leaves new growth vulnerable to hard freezes.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Choose the Right Spot</h4>
-          <p>Pick a location that gets at least 6 hours of direct sunlight and has well-draining
-            soil. Tulips hate sitting in soggy ground — if your soil holds water, mix in some
-            coarse sand or plant in a raised bed.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Plant Correctly</h4>
-          <p>Dig holes 6–8 inches deep and place each bulb pointed-side up. Space bulbs 4–6
-            inches apart. Backfill with soil, press gently to eliminate air pockets, then give
-            the bed a thorough watering. That's the last watering they'll need until spring.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <div class="callout-label">🌍 About Your Dutch Bulbs</div>
-      <p>Your bulbs were sourced from the Netherlands, where tulip growing has been perfected
-        over 400 years. Dutch bulbs are carefully conditioned during export, but planting them
-        in cold fall soil is still essential — that cold period (called vernalization) is what
-        triggers the bloom. Trust the process.</p>
-    </div>
+    <div class="section-eyebrow">Your growing season</div>
+    <div class="section-title">Four Phases, Year after Year</div>
   </div>
 
-  <div class="guide-divider">🌷 · · · 🌷</div>
-
-  <!-- STEP 2: WINTER -->
-  <div class="guide-section">
-    <div class="section-eyebrow">Step 2 — Winter</div>
-    <div class="section-title">Underground Magic</div>
-
-    <div class="step-list">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Leave Them Alone</h4>
-          <p>In most climates (zones 5–7) no action is needed at all. Your bulbs are
-            vernalizing — undergoing the cold exposure that cues them to bloom. Resist
-            any urge to check on them or water them.</p>
-        </div>
+  <div class="timeline-outer">
+    <div class="timeline-track" id="timelineTrack">
+      <div class="phase-node" id="node-0" onclick="showPhase(0)">
+        <div class="phase-circle">🍂</div>
+        <div class="phase-label">Fall</div>
+        <div class="phase-months">Oct – Nov</div>
       </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Mulch in Very Cold Climates</h4>
-          <p>If you're in zone 4 or colder, apply a 2–3 inch layer of straw or shredded leaves
-            over the bed after the ground freezes. This regulates soil temperature and prevents
-            the freeze-thaw cycles that can heave bulbs out of the ground.</p>
-        </div>
+      <div class="timeline-line" id="line-0"></div>
+      <div class="phase-node" id="node-1" onclick="showPhase(1)">
+        <div class="phase-circle">❄️</div>
+        <div class="phase-label">Winter</div>
+        <div class="phase-months">Dec – Feb</div>
       </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Watch for Green Tips in Late Winter</h4>
-          <p>By late February or March you may spot small green points pushing through the soil.
-            This is a great sign — your bulbs have done their cold work and are waking up.
-            Remove any mulch at this point so the shoots can grow freely.</p>
-        </div>
+      <div class="timeline-line" id="line-1"></div>
+      <div class="phase-node" id="node-2" onclick="showPhase(2)">
+        <div class="phase-circle">🌷</div>
+        <div class="phase-label">Spring</div>
+        <div class="phase-months">Mar – May</div>
+      </div>
+      <div class="timeline-line" id="line-2"></div>
+      <div class="phase-node" id="node-3" onclick="showPhase(3)">
+        <div class="phase-circle">☀️</div>
+        <div class="phase-label">Summer</div>
+        <div class="phase-months">June – Sept</div>
       </div>
     </div>
   </div>
 
-  <div class="guide-divider">🌷 · · · 🌷</div>
-
-  <!-- STEP 3: SPRING -->
-  <div class="guide-section">
-    <div class="section-eyebrow">Step 3 — Spring</div>
-    <div class="section-title">Bloom Season &amp; Deadheading</div>
-
-    <div class="step-list" style="margin-bottom:20px;">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Water at the Base, Not Overhead</h4>
-          <p>As shoots grow and buds form, water only at soil level if conditions are dry.
-            Wetting the foliage and petals encourages fungal issues. Once blooms open, you
-            can mostly let spring rains do the work.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Deadhead at the Right Moment</h4>
-          <p>Once petals begin to drop or look papery — usually 2–3 weeks after opening —
-            it's time to deadhead. Leaving the spent bloom on the plant signals it to put
-            energy into making seeds instead of recharging the bulb.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Snip Just the Flower Head</h4>
-          <p>Using clean scissors or pruners, cut the stem just below the flower head, right
-            above the first leaf. Remove only the bloom — not the stem or leaves. The green
-            parts are still feeding the bulb through photosynthesis and must stay on the plant.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h4>Leave the Foliage Alone</h4>
-          <p>This is the most important rule of the whole growing season: do not cut back the
-            leaves until they have turned fully yellow and fallen over on their own — usually
-            about 6 weeks after the bloom. Cutting them early is the single most common reason
-            tulips fail to return the following year.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <div class="callout-label">💡 Hiding the Dying Foliage</div>
-      <p>If the yellowing leaves feel untidy, try planting low-growing perennials like creeping
-        phlox or hostas nearby. They'll fill in around the tulips and camouflage the foliage
-        as it fades, without competing with or disturbing the bulbs.</p>
-    </div>
+  <div class="phase-panel-wrap">
+    <div class="phase-panel" id="phasePanel"></div>
   </div>
 
   <div class="guide-divider">🌷 · · · 🌷</div>
 
-  <!-- STEP 4: SUMMER -->
   <div class="guide-section">
-    <div class="section-eyebrow">Step 4 — Early Summer</div>
-    <div class="section-title">Lifting &amp; Storing Your Bulbs</div>
-
-    <div class="step-list" style="margin-bottom:20px;">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Wait for Leaves to Fully Yellow</h4>
-          <p>Resist the urge to dig early. Wait until the leaves have gone fully yellow or brown
-            and laid flat — typically late May to mid-June. At this point the bulb has absorbed
-            all the nutrients it can and is ready to be lifted.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Dig Carefully</h4>
-          <p>Use a garden fork or trowel and work in a generous circle about 6 inches out from
-            the stem to avoid nicking the bulb. Loosen the soil and gently lift. You may find
-            small "daughter" bulbs attached — these can be replanted separately and will bloom
-            in 1–2 years.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Cure for 3–5 Days</h4>
-          <p>Brush off excess soil (don't wash the bulbs) and spread them in a single layer in
-            a shaded, well-ventilated spot for 3–5 days. This curing period dries the outer
-            skin and prevents rot during storage. Discard any bulbs that feel mushy, look
-            diseased, or have lost their papery outer tunic.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="checklist" style="margin-bottom:20px;">
-      <div class="check-item">
-        <div class="check-icon">🌡️</div>
-        <div class="check-body">
-          <h4>Store Cool &amp; Dry</h4>
-          <p>Keep bulbs somewhere with temperatures between 60–70°F and low humidity — a
-            garage, shed, or cool basement shelf works great. Moisture is the enemy
-            of stored bulbs.</p>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-icon">🧺</div>
-        <div class="check-body">
-          <h4>Use a Breathable Container</h4>
-          <p>Store in a mesh bag, old pantyhose, a wooden crate with slats, or a cardboard box
-            with ventilation holes. Never use sealed plastic or airtight containers — bulbs
-            need airflow to prevent mold.</p>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-icon">🚫</div>
-        <div class="check-body">
-          <h4>Keep Away from Fruit</h4>
-          <p>Do not store bulbs near apples, pears, or other ripening fruit. Ripening fruit
-            releases ethylene gas, which can damage the flower developing inside the bulb and
-            cause deformed or missing blooms next spring.</p>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-icon">🔍</div>
-        <div class="check-body">
-          <h4>Check Monthly</h4>
-          <p>Give bulbs a quick look every few weeks and remove any that develop soft spots,
-            mold, or an off-putting smell. One bad bulb can spread rot to its neighbors.</p>
-        </div>
-      </div>
-      <div class="check-item">
-        <div class="check-icon">🏷️</div>
-        <div class="check-body">
-          <h4>Label Your Varieties</h4>
-          <p>With multiple varieties in the mix, pop a small label on each group with the
-            variety name. It makes fall planting much more intentional — you'll know exactly
-            what color is going where before the first bulb hits the soil.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout">
-      <div class="callout-label">🔁 Then Repeat from Step 1</div>
-      <p>Once October rolls around and overnight temps drop below 50°F, you're back to Step 1.
-        Plant your stored bulbs and do it all over again — year after year, each spring more
-        established than the last.</p>
-    </div>
-  </div>
-
-  <div class="guide-divider">🌷 · · · 🌷</div>
-
-  <!-- TIMING TABLE -->
-  <div class="guide-section">
-    <div class="section-eyebrow">Quick Reference</div>
+    <div class="section-eyebrow">Quick reference</div>
     <div class="section-title">Month-by-Month at a Glance</div>
     <table class="timing-table">
       <thead>
@@ -601,32 +617,32 @@
       <tbody>
         <tr>
           <td>Oct – Nov</td>
-          <td>Plant bulbs 6–8" deep, pointed-side up. Water in well.</td>
+          <td>Plant bulbs 6–8" deep, pointed-side up. Water thoroughly after planting.</td>
           <td><span class="timing-badge do">Plant</span></td>
         </tr>
         <tr>
           <td>Dec – Feb</td>
-          <td>No action needed. Bulbs are vernalizing underground.</td>
+          <td>Nothing to do! Bulbs are sleeping underground and building up energy.</td>
           <td><span class="timing-badge wait">Rest</span></td>
         </tr>
         <tr>
           <td>Mar – Apr</td>
-          <td>Shoots emerge, then blooms! Water at the base only if dry.</td>
+          <td>Green shoots appear, then flowers open. Water at the base only if it hasn't rained.</td>
           <td><span class="timing-badge do">Bloom</span></td>
         </tr>
         <tr>
           <td>Apr – May</td>
-          <td>Deadhead spent flowers. Let foliage die back naturally — do not cut.</td>
+          <td>Snip off dead flower heads. Leave all the leaves and stems — do not cut them.</td>
           <td><span class="timing-badge do">Deadhead</span></td>
         </tr>
         <tr>
           <td>May – June</td>
-          <td>Once leaves are fully yellow and flat, dig and lift bulbs carefully.</td>
+          <td>Once leaves are completely yellow and lying flat, carefully dig up the bulbs.</td>
           <td><span class="timing-badge do">Lift</span></td>
         </tr>
         <tr>
           <td>June – Sept</td>
-          <td>Cure 3–5 days in shade, then store cool and dry until October.</td>
+          <td>Let bulbs dry out for a few days, then keep in a cool dry place until October.</td>
           <td><span class="timing-badge store">Store</span></td>
         </tr>
       </tbody>
@@ -635,62 +651,278 @@
 
   <div class="guide-divider">🌷 · · · 🌷</div>
 
-  <!-- TROUBLESHOOTING -->
   <div class="guide-section">
-    <div class="section-eyebrow">Common Questions</div>
+    <div class="section-eyebrow">Common questions</div>
     <div class="section-title">Troubleshooting &amp; Tips</div>
-    <div class="step-list">
-      <div class="step-item">
-        <div class="step-num q">?</div>
-        <div class="step-body">
-          <h4>My tulips came up but didn't bloom — why?</h4>
-          <p>The most common causes are cutting the foliage back too early the previous year
-            (starving the bulb of nutrients), planting too shallow, or insufficient cold during
-            vernalization. Bulbs need at least 12–14 weeks below 50°F to trigger a bloom.</p>
+    <div class="accordion" id="accordion">
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <h4>My tulips came up but didn't flower — why?</h4>
+          <div class="acc-icon">+</div>
+        </div>
+        <div class="acc-body">
+          <p>The most common reason is cutting the leaves back too early the year before. The leaves feed energy back into the bulb after blooming — if you cut them while they're still green, the bulb doesn't get the fuel it needs to flower again. Another common cause is not enough cold weather over winter. Tulips actually need a long cold period (at least 12–14 weeks below 50°F) to trigger blooming — it's how they know winter is over and spring has arrived.</p>
         </div>
       </div>
-      <div class="step-item">
-        <div class="step-num q">?</div>
-        <div class="step-body">
-          <h4>Do I have to lift bulbs every year?</h4>
-          <p>In warm climates (zone 8 and warmer) yes — summer heat and humidity will rot them
-            in the ground. In cooler climates (zones 4–7) you can leave them, though lifting
-            and storing tends to produce bigger, more reliable blooms year after year.</p>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <h4>Do I have to dig up the bulbs every year?</h4>
+          <div class="acc-icon">+</div>
+        </div>
+        <div class="acc-body">
+          <p>If you live somewhere with hot, humid summers (think the American South), yes — the heat and moisture will rot the bulbs in the ground. If you're in a cooler climate with distinct seasons, you can sometimes leave them in the ground, but digging them up and storing them over summer almost always gives you better, bigger blooms the next spring. Think of it like giving the bulb a proper rest in good conditions rather than leaving it to survive whatever the summer throws at it.</p>
         </div>
       </div>
-      <div class="step-item">
-        <div class="step-num q">?</div>
-        <div class="step-body">
-          <h4>Squirrels keep digging up my bulbs!</h4>
-          <p>A few tricks that work well: lay chicken wire flat over the planting area (remove
-            in spring), sprinkle crushed red pepper flakes in the soil, or plant bulbs beneath
-            a layer of gravel. Sprinkling blood meal fertilizer on the soil surface also deters
-            most rodents.</p>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <h4>Squirrels or chipmunks keep digging up my bulbs!</h4>
+          <div class="acc-icon">+</div>
+        </div>
+        <div class="acc-body">
+          <p>This is one of the most common frustrations for tulip growers! A few things that work well: lay a piece of chicken wire (a metal mesh you can find at any hardware store) flat over the soil right after planting and remove it in spring before shoots appear. You can also sprinkle crushed red pepper flakes into the planting hole — animals hate the smell. Planting a bit deeper than usual (8 inches instead of 6) also helps, since it's harder for them to find.</p>
         </div>
       </div>
-      <div class="step-item">
-        <div class="step-num q">?</div>
-        <div class="step-body">
-          <h4>Can I use them as cut flowers?</h4>
-          <p>Absolutely! Cut tulips when the bud is still closed but fully colored, trimming
-            the stem at an angle. Place in cool water and they'll open beautifully indoors.
-            Keep them away from warm spots and direct sun — tulips actually prefer cool
-            temperatures and will last 7–10 days in a vase.</p>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <h4>Can I cut them and put them in a vase?</h4>
+          <div class="acc-icon">+</div>
+        </div>
+        <div class="acc-body">
+          <p>Yes, and they make gorgeous cut flowers! The trick is to cut them while the bud is still closed but fully colored — not after they've already opened. Use sharp scissors and cut the stem at an angle (this helps the stem take up more water). Place them in a vase with cool, fresh water and keep them somewhere cool and away from direct sunlight. Tulips actually prefer cool temperatures and will last 7–10 days indoors. Change the water every couple of days to keep them fresh longer.</p>
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- CLOSING -->
-  <div class="guide-section" style="margin-bottom:52px;">
-    <div class="callout">
+  <div class="guide-section" style="margin-bottom:60px;">
+    <div class="closing-callout">
       <div class="callout-label">❤️ From Matt &amp; Amanda</div>
-      <p>We hope this guide helps you grow the most beautiful garden. Every spring when your
-        tulips come up, that's a little reminder of how much you're loved. Happy growing! 🌷</p>
+      <p style="font-size:0.92rem;line-height:1.75;color:var(--text);font-weight:600;margin:8px 0 0;">
+        We hope this guide takes away any mystery and makes this feel totally doable.
+        Tulips are more forgiving than people think — and the payoff every spring is
+        absolutely worth it. Happy growing! 🌷
+      </p>
     </div>
   </div>
 
   <footer>Made with love by Matt &amp; Amanda 🌷</footer>
+
+  <script>
+    var phases = [
+      {
+        eyebrow: 'Step 1 of 4 — Fall',
+        title: 'Plant Your Bulbs in Autumn',
+        steps: [
+          {
+            num: 1,
+            heading: 'Wait until it\'s cold enough',
+            body: 'Plant your bulbs in October or November, after several nights in a row have dropped below 50\u00b0F. Why does this matter? If the soil is still warm when you plant, the bulb can start growing too early and the new sprouts will get damaged by winter cold. You want the bulb to go straight into a cold "sleep" — that cold rest is actually what tells it to bloom in spring.'
+          },
+          {
+            num: 2,
+            heading: 'Pick a sunny spot with good drainage',
+            body: 'Tulips need at least 6 hours of direct sunlight a day to bloom well. Just as important: make sure the spot doesn\'t collect puddles after rain. Bulbs sitting in soggy soil will rot. If your yard stays wet, try a raised garden bed or mix a bag of coarse sand into the soil to help water drain away faster.'
+          },
+          {
+            num: 3,
+            heading: 'Plant the bulb the right way up',
+            body: 'Dig a hole about 6 to 8 inches deep — roughly the length of your hand from palm to fingertip. Place the bulb with the pointed tip facing up and the flat, slightly rounded base facing down. If you\'re ever unsure which end is which, look for the papery dry skin (like an onion) and the small roots on the flat end. Space bulbs about 4 to 6 inches apart, fill the hole back in with soil, press it down gently, and give the whole area a thorough watering. That\'s it until spring!'
+          }
+        ],
+        callout: {
+          label: '\uD83C\uDF0D About Your Dutch Bulbs',
+          text: 'Your bulbs came all the way from the Netherlands, where tulips have been grown for over 400 years. They arrive healthy and ready to go — you just need to get them in the ground before hard frost sets in. The cold winter ahead isn\'t a threat to them; it\'s exactly what they need to put on a beautiful show next spring.'
+        },
+        nextLabel: 'Winter \u2014 Underground Magic'
+      },
+      {
+        eyebrow: 'Step 2 of 4 \u2014 Winter',
+        title: 'Sit Back and Do Nothing',
+        steps: [
+          {
+            num: 1,
+            heading: 'Seriously \u2014 leave them alone',
+            body: 'This is the easiest phase: there is nothing to do. Underground, your bulbs are doing exactly what they need to do \u2014 resting and slowly building energy for their spring bloom. Don\'t water them, don\'t fertilize, and resist the urge to dig one up to check on it. The cold and dark is not hurting them. It\'s actually essential. Without a good cold rest (gardeners call this "vernalization"), tulips won\'t bloom properly \u2014 the cold is what triggers the flower.'
+          },
+          {
+            num: 2,
+            heading: 'Add a light blanket of mulch if you get very harsh winters',
+            body: 'If temperatures in your area regularly drop below 0\u00b0F (common in the northern US and Canada), spread a 2 to 3 inch layer of straw or shredded leaves over the planting area after the ground freezes. This acts like a blanket that keeps the soil temperature from swinging wildly between freeze and thaw \u2014 those dramatic swings can push bulbs right out of the ground. If your winters are milder, skip this step entirely.'
+          },
+          {
+            num: 3,
+            heading: 'Keep an eye out for green tips in late winter',
+            body: 'Sometime in late February or early March, you might notice small green points poking through the soil. This is a great sign \u2014 it means the bulb has finished its cold rest and is waking up! If you put down mulch in step 2, gently rake it back so the new shoots have a clear path to the light. From here, spring is right around the corner.'
+          }
+        ],
+        callout: null,
+        nextLabel: 'Spring \u2014 Bloom Season'
+      },
+      {
+        eyebrow: 'Step 3 of 4 \u2014 Spring',
+        title: 'Enjoy the Blooms, Then Remove the Dead Flowers',
+        steps: [
+          {
+            num: 1,
+            heading: 'Water only at the base, not on the flowers',
+            body: 'As your tulips grow and buds form, only water if it has been dry for a week or more \u2014 and always pour water at the base of the plant near the soil, not overhead onto the leaves and flowers. Getting the flowers and leaves wet can encourage mold. In most cases, normal spring rainfall is enough and you won\'t need to water at all.'
+          },
+          {
+            num: 2,
+            heading: 'Remove the dead flower heads (this is called "deadheading")',
+            body: 'Once your tulip flowers start to droop, turn brown, and lose their petals \u2014 usually about 2 to 3 weeks after they opened \u2014 it\'s time to snip them off. This is called "deadheading," and it\'s simply the act of removing the spent, dead flower. Here\'s why it matters: if you leave the dead flower on the plant, the tulip puts its remaining energy into forming seeds inside it. You want all that energy going back into the bulb instead, so it comes back strong next year.'
+          },
+          {
+            num: 3,
+            heading: 'How to deadhead: cut just the flower, not the stem',
+            body: 'Use clean scissors or garden shears. Look for where the flower head sits on top of the green stem \u2014 cut right below the dead flower, just above where the first leaf meets the stem. You\'re removing only the flower head itself, not the green stem or any of the leaves. The green parts are still very much alive and working hard, so leave them completely alone.'
+          },
+          {
+            num: 4,
+            heading: 'Leave the leaves until they turn yellow on their own \u2014 this is the most important rule',
+            body: 'After the flower is gone, the leaves and stem will stay green for several more weeks. This is normal, and they need to be left in place. The leaves are like solar panels \u2014 they absorb sunlight and send that energy back down into the bulb, recharging it for next year\'s bloom. If you cut the leaves while they\'re still green, the bulb doesn\'t get recharged and often won\'t flower again. Wait until the leaves have turned fully yellow or brown and are lying flat on the ground on their own \u2014 that usually takes about 6 weeks after the flower was removed. Only then is it safe to pull them away or cut them back.'
+          }
+        ],
+        callout: {
+          label: '\uD83D\uDCA1 The Dying Leaves Look Messy \u2014 That\'s Okay',
+          text: 'Yellow, flopped-over leaves aren\'t a pretty sight, we know. One easy trick: plant something low and leafy nearby \u2014 like hostas or creeping phlox \u2014 and as the tulip leaves die back, the surrounding plants will fill in and hide them. It\'s a classic garden trick and it works really well.'
+        },
+        nextLabel: 'Summer \u2014 Dig Up &amp; Store'
+      },
+      {
+        eyebrow: 'Step 4 of 4 \u2014 Summer',
+        title: 'Dig Up the Bulbs &amp; Store Them for Next Year',
+        steps: [
+          {
+            num: 1,
+            heading: 'Wait for the right moment to dig',
+            body: 'The right time to dig up your bulbs is when the leaves have gone completely yellow or brown and are lying flat on the ground \u2014 typically late May to mid-June. Don\'t rush this. Even if the leaves look bad, as long as any green remains, the bulb is still pulling nutrients from them. Once everything is fully yellow and flat, the bulb has gotten everything it can from the plant and is ready to come out.'
+          },
+          {
+            num: 2,
+            heading: 'Dig carefully so you don\'t slice the bulb',
+            body: 'Use a garden trowel or a hand fork (a small hand tool with prongs) and push it into the soil about 6 inches away from where the stem is, working in a circle around it. Then gently lever the soil up to loosen it. This wider approach helps you avoid accidentally cutting through the bulb. Lift the bulb out and brush off the loose dirt with your hand \u2014 don\'t wash it with water. You may find small extra bulbs clinging to the sides of the main one. These are called "offsets" or "daughter bulbs" and are a bonus \u2014 you can replant them separately and they\'ll grow into full-sized blooming bulbs within a year or two.'
+          },
+          {
+            num: 3,
+            heading: 'Let them dry out before storing (this is called "curing")',
+            body: 'Before you put the bulbs away for the summer, they need a few days to dry out properly. Lay them out in a single layer somewhere shaded, dry, and with good airflow \u2014 like a table in a garage or on a covered porch. Leave them there for 3 to 5 days. This drying process (called "curing") lets the outer skin harden slightly, which protects the bulb from rotting during storage. Once cured, look each bulb over. Throw away any that feel soft or mushy when squeezed, have visible mold or dark soggy spots, or smell strongly off. A healthy bulb feels firm, like a small onion.'
+          }
+        ],
+        checks: [
+          {
+            icon: '\uD83C\uDF21\uFE0F',
+            heading: 'Store somewhere cool and dry',
+            body: 'Aim for a spot that stays between 60 and 70\u00b0F \u2014 a garage shelf, a cool basement, or a closet works great. Avoid anywhere that gets warm or damp, like a kitchen cabinet or a garden shed that heats up in summer.'
+          },
+          {
+            icon: '\uD83E\uDDF9',
+            heading: 'Use a container that lets air flow through',
+            body: 'Store bulbs in a mesh produce bag, a paper bag with holes punched in it, an old pair of pantyhose, or a cardboard box with the flaps left open. Never use a sealed plastic bag or airtight container \u2014 the trapped moisture will cause mold and rot.'
+          },
+          {
+            icon: '\uD83C\uDF4E',
+            heading: 'Don\'t store them near fruit',
+            body: 'Keep bulbs away from apples, pears, or other fruit \u2014 even in the same room. Ripening fruit gives off an invisible gas called ethylene that damages the flower forming inside the bulb. It sounds odd, but it really does affect your bloom next year.'
+          },
+          {
+            icon: '\uD83D\uDD0D',
+            heading: 'Do a quick check every few weeks',
+            body: 'Once a month, peek at your stored bulbs and remove any that have developed soft spots, white fuzzy mold, or a bad smell. One rotting bulb can spread to its neighbors quickly, so catching it early saves the rest.'
+          },
+          {
+            icon: '\uD83C\uDFF7\uFE0F',
+            heading: 'Label each variety',
+            body: 'You have more than one tulip variety in your collection! Pop a small sticky label or piece of masking tape on each bag with the variety name. Come October, you\'ll be glad you did \u2014 you\'ll know exactly which color to plant where.'
+          }
+        ],
+        callout: {
+          label: '\uD83D\uDD01 Then Do It All Again Next Fall',
+          text: 'Once October arrives and nights get cold again, pull your stored bulbs out and plant them back in the ground \u2014 and the whole cycle begins again. Year after year your bulbs will multiply and your spring display will get more impressive every time.'
+        },
+        nextLabel: null
+      }
+    ];
+
+    var activePhase = 0;
+
+    function buildStepHTML(s) {
+      return '<div class="step-item">'
+        + '<div class="step-num">' + s.num + '</div>'
+        + '<div class="step-body"><h4>' + s.heading + '</h4><p>' + s.body + '</p></div>'
+        + '</div>';
+    }
+
+    function buildCheckHTML(c) {
+      return '<div class="check-item">'
+        + '<div class="check-icon">' + c.icon + '</div>'
+        + '<div class="check-body"><h4>' + c.heading + '</h4><p>' + c.body + '</p></div>'
+        + '</div>';
+    }
+
+    function buildPanelHTML(idx) {
+      var p = phases[idx];
+      var html = '<div class="panel-eyebrow">' + p.eyebrow + '</div>';
+      html += '<div class="panel-title">' + p.title + '</div>';
+      html += '<div class="step-list">';
+      p.steps.forEach(function(s) { html += buildStepHTML(s); });
+      html += '</div>';
+      if (p.checks) {
+        html += '<div class="check-list">';
+        p.checks.forEach(function(c) { html += buildCheckHTML(c); });
+        html += '</div>';
+      }
+      if (p.callout) {
+        html += '<div class="callout"><div class="callout-label">' + p.callout.label + '</div>'
+          + '<p>' + p.callout.text + '</p></div>';
+      }
+      html += '<div class="nav-row">';
+      if (p.nextLabel) {
+        html += '<button class="next-btn" onclick="showPhase(' + (idx + 1) + ')">'
+          + p.nextLabel + ' &#8594;</button>';
+      } else {
+        html += '<button class="restart-btn" onclick="showPhase(0)">&#8635; Start over from Fall</button>';
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function showPhase(idx) {
+      activePhase = idx;
+      document.querySelectorAll('.phase-node').forEach(function(node, i) {
+        node.classList.toggle('active', i === idx);
+        node.classList.toggle('done', i < idx);
+      });
+      document.querySelectorAll('.timeline-line').forEach(function(line, i) {
+        line.classList.toggle('passed', i < idx);
+      });
+      var panel = document.getElementById('phasePanel');
+      panel.classList.remove('visible');
+      setTimeout(function() {
+        panel.innerHTML = buildPanelHTML(idx);
+        panel.classList.add('visible');
+        if (window.innerWidth < 640) {
+          setTimeout(function() {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 50);
+        }
+      }, 200);
+    }
+
+    function toggleAcc(header) {
+      var item = header.parentElement;
+      var body = header.nextElementSibling;
+      var isOpen = item.classList.toggle('open');
+      body.classList.toggle('open', isOpen);
+    }
+
+    showPhase(0);
+  </script>
 
   <script src="../js/petals.js"></script>
 </body>
